@@ -37,5 +37,5 @@ coding!
 - Damilola Oshinowo #1: [GitHub](https://github.com/dami-boy) / [LinkedIn](https://linkedin.com/in/damilola-oshinowo)
 - Riry Nomenjanahary #2: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://www.linkedin.com/in/riry-nomenjanahary)
 - R. Ed Masawi #3: [GitHub](https://github.com/Masawi68) / [LinkedIn](https://www.linkedin.com/in/ed-masawi-97345a29/)
-  
+- Ismail Marghich #4: [GitHub](https://github.com/IsmailMarghich) / [LinkedIn](https://www.linkedin.com/in/ismail-marghich-9174111aa/)
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
