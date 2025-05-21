@@ -8,7 +8,7 @@
   --primary: #7C05F2;
   --black-text: hsla(16, 23%, 9%, 1);
   --white-surface: #F2F2F2;
-  --balck-surface: #0e1217;
+  --black-surface: #0e1217;
   --gray-surface: hsla(210, 100%, 98%, 1);
   --gray-text: #8C8C8C;
   --foreground: #171717;
@@ -21,7 +21,9 @@
   --color-tertiary: var(--tertiary);
   --color-black-text: var(--black-text);
   --color-gray-text: var(--gray-text);
+  --color-on-primary: var(--white-surface);
   --color-background: var(--white-surface);
+  --color-light-background: var(--gray-surface);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -38,6 +40,9 @@
   }
   html {
     scroll-behavior: smooth;
+  }
+  button {
+    cursor: pointer;
   }
 }
 /*todo: define dark mode theme */

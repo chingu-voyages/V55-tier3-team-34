@@ -1,1 +1,1 @@
-// profile component forlder
+// profiles component forlder
