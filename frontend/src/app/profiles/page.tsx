@@ -1,6 +1,6 @@
 export default function ProfilePage() {
    return(
-       <div>
+       <div className="w-auto max-w-4xl">
            Profile page
        </div>
    )
