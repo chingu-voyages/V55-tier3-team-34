@@ -1,5 +1,6 @@
 import {NextFunction, Request, Response} from "express";
 import {profileRepository} from "../repositories/profile.repository";
+import {User} from "../db/schema/user";
 
 
 
@@ -16,8 +17,10 @@ export const profileController = {
                 res.status(500).json({
                     message: e.message
                 })
+            } else {
+                res.status(500).json({ message: 'Failed to fetch profile' });
             }
-            res.status(500).json({ message: 'Failed to fetch profile' });
+
         }
     },
     getProfiles: async (req: Request, res: Response, next: NextFunction) => {
@@ -34,9 +37,31 @@ export const profileController = {
                 res.status(500).json({
                     message: e.message
                 })
+            }else {
+                res.status(500).json({ message: 'Failed to fetch profiles' });
             }
-            res.status(500).json({ message: 'Failed to fetch profiles' });
 
+
+        }
+    },
+    updateProfile: async (req: Request, res: Response, next: NextFunction) => {
+        const updateData = req.body;
+        const user = req.user as User;
+        const userId = user.userId;
+        try {
+            const updatedProfile = await profileRepository().updateUserProfile(userId, updateData);
+            res.status(201).json({
+                data: updatedProfile,
+                message: "Profile udpated sucessfully"
+            })
+        }catch (e) {
+            if(e instanceof  Error) {
+                res.status(500).json({
+                    message: e.message
+                })
+            }else {
+                res.status(500).json({ message: 'Failed to update profile' });
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ export const profileRepository = () => {
           return  db.update(users).set({
               updatedAt: sql`NOW()`,
               ...data,
-          }).where(eq(users.userId, userId))
+          }).where(eq(users.userId, userId)).execute()
     }
     return {
         updateUserProfile,
