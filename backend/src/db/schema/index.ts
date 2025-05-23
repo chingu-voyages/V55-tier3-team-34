@@ -1,1 +1,1 @@
-export * from "./user"
+export { federatedCredentials, users, federatedCredentialsUsersRelation, usersRelations} from "./user"

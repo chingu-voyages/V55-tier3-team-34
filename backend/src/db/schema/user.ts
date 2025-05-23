@@ -1,8 +1,8 @@
 import {integer , pgTable , unique , varchar} from "drizzle-orm/pg-core";
+import {createInsertSchema , createUpdateSchema} from "drizzle-zod";
+import {relations} from "drizzle-orm";
 
 import {timestamps} from "../columns.helpers";
-import {createInsertSchema} from "drizzle-zod";
-import {relations} from "drizzle-orm";
 
 
 export const users = pgTable('users', {
@@ -28,13 +28,15 @@ export const usersRelations = relations(users, ({many}) =>({
     federatedCredentials: many(federatedCredentials)
 }))
 
-export const FederatedCredentialsUsersRelation = relations(federatedCredentials, ({one}) => ({
+export const federatedCredentialsUsersRelation = relations(federatedCredentials, ({one}) => ({
     user: one(users,{
         fields: [federatedCredentials.userId],
         references: [users.userId]
     })
 }))
 export const userCreateSchema = createInsertSchema(users)
+export const userUpdateSchema = createUpdateSchema(users)
+export type UpdateUser = Partial<typeof users.$inferInsert>
 export type User = typeof users.$inferSelect;
 export type FederatedCredential = typeof federatedCredentials.$inferSelect
 export type FederatedCredentialWithUser = FederatedCredential & { user: User}

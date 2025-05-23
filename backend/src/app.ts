@@ -7,6 +7,7 @@ import {errorHandler} from "./middleware/errorhandler.middleware";
 import setupPassport from "./lib/oauth/strategies/oauth.strategy";
 import config from "./config/config";
 import authRoutes from "./routes/auth.routes";
+import {profileRouter} from "./routes/profile.route";
 
 
 const app = express();
@@ -30,7 +31,8 @@ app.use(cors())
 app.use(errorHandler);
 
 //Routes
-app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes);
+app.use('/api/profiles', profileRouter)
 
 export default app;
 
