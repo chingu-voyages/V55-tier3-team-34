@@ -6,7 +6,7 @@ declare global {
     namespace Express {
         interface User extends UserType{}
         interface Request {
-            user?:  User
+            user?:  UserType & { userId: number };
         }
     }
 }

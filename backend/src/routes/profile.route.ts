@@ -8,6 +8,7 @@ const profileRouter = Router()
 
 profileRouter.get('/:profileId', profileController.getProfile);
 profileRouter.get('/', profileController.getProfiles);
+profileRouter.get('/me', ensureAuthenticated, profileController.getMyProfile);
 profileRouter.put('/', ensureAuthenticated, validationData(userUpdateSchema), profileController.updateProfile)
 
 export { profileRouter }

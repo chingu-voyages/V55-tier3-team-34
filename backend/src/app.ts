@@ -10,6 +10,7 @@ import authRoutes from "./routes/auth.routes";
 import {profileRouter} from "./routes/profile.route";
 
 
+
 const app = express();
 
 setupPassport(passport);
