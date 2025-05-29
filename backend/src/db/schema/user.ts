@@ -22,13 +22,14 @@ export const users = pgTable('users', {
 
 export const federatedCredentials = pgTable("federated_credentials", {
     federatedId: integer("federated_id").primaryKey().generatedAlwaysAsIdentity(),
-    userId: integer("user_id").references(() => users.userId),
+    userId: integer("federated_user_id").references(() => users.userId),
     provider: varchar({length: 50}).notNull(),
     providerUserId: varchar("provider_user_id", {length: 255}).notNull()
 }, (table) => ({
     uniqueProviderUser: unique().on(table.provider, table.providerUserId)
     })
 )
+
 
 export const usersRelations = relations(users, ({many}) =>({
     federatedCredentials: many(federatedCredentials),

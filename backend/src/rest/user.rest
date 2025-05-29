@@ -1,0 +1,42 @@
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+{
+  "firstname": "ed",
+    "lastname": "klue",
+    "email": "test@example.com",
+    "password": "test"
+}
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+    "password": "test"
+}
+###
+
+GET http://localhost:3000/api/auth/me
+Content-Type: application/json
+Cookie: connect.sid=s%3AC2ZiJfxlm7HypihhSiLzbkyfBren5Ckc.zrpN81VBOD3lRla8XEno%2BTxMH9u0QCVF4CbAoiBozw0
+
+###
+
+PUT http://localhost:3000/api/profiles
+Content-Type: application/json
+Cookie: connect.sid=s%3A37ZLNEqe_cvPGHuL_npycbfXI4VYS3Pv.cZTgev7umsp0MNk5skL0hRo%2FAGiTO%2BPp67sLLjKy9BU
+
+{
+  "firstname": "Ed",
+  "lastname": "Klue",
+  "bio": "Full-stack developer passionate about open source.",
+  "avatarUrl": "https://example.com/avatar.jpg",
+  "githubUrl": "https://github.com/edklue"
+}
+
+###
+GET http://localhost:3000/api/profiles
+Content-Type: application/json
+Cookie: connect.sid=s%3A37ZLNEqe_cvPGHuL_npycbfXI4VYS3Pv.cZTgev7umsp0MNk5skL0hRo%2FAGiTO%2BPp67sLLjKy9BU
