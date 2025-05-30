@@ -1,4 +1,4 @@
-import express from "express";
+import express , {NextFunction, Request, Response} from "express";
 import cors from "cors";
 import passport from "passport";
 import session from "express-session";
@@ -13,21 +13,31 @@ import {profileRouter} from "./routes/profile.route";
 const app = express();
 
 setupPassport(passport);
+//middleware
+app.use(express.json());
+app.use(cors({
+    origin: config.clientUrl,
+    credentials: true
+}))
 app.use(session({
     secret: config.sessionSecret,
-    resave: false,
     saveUninitialized: false,
+    resave: false,
     cookie: {
-        secure: true,
-        sameSite: true
+        secure: config.nodeEnv === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     }
 }))
-//middleware
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(express.json());
-app.use(cors())
+
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    console.log('Cookies reçus :', req.cookies, req.user);
+    console.log('Session :', req.session, req.user);
+    next();
+});
 app.use(errorHandler);
 
 //Routes

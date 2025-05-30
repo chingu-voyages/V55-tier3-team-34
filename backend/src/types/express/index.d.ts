@@ -1,4 +1,4 @@
-import { User as UserType} from "./src/db/schema/user";
+import { User as UserType} from "../../db/schema/user";
 
 export {}
 

@@ -8,7 +8,8 @@ export const profileController = {
     getProfile: async (req: Request, res: Response, next: NextFunction)=> {
         const { profileId } = req.params;
         try {
-            const foundProfile = await profileRepository().getProfileById(parseInt(profileId))
+            const foundProfile = await profileRepository().getProfileById(parseInt(profileId, 10))
+            console.log(foundProfile)
             res.status(200).json({
                 data: foundProfile
             })
@@ -20,7 +21,6 @@ export const profileController = {
             } else {
                 res.status(500).json({ message: 'Failed to fetch profile' });
             }
-
         }
     },
     getProfiles: async (req: Request, res: Response, next: NextFunction) => {

@@ -8,7 +8,7 @@ import {  User} from "../../../db/schema/user";
 export type PassportCallback = (error: any, user?: User) => void
 export default (passport: PassportStatic) => {
     passport.serializeUser<any, any>((req, user, done) => {
-        done(undefined, user);
+        done(undefined, (user as User).userId);
     });
     passport.deserializeUser(async (id: number, done)=> {
         try {
@@ -36,6 +36,7 @@ export default (passport: PassportStatic) => {
                  }
              )
              if(!user) return  done(null, undefined)
+
              return done(null, user)
          }catch (e) {
              return done(e)

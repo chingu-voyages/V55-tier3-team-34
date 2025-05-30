@@ -22,10 +22,7 @@ export function Menubar() {
         setActiveMenu(menuLabel)
     }
     return (
-        <aside className="w-[16rem]  border-r-1 border-gray-200">
-            <div className="p-4 mb-2">
-                <ChinguAsyncLogo />
-            </div>
+        <aside className="w-[16rem]  bg-sidebar-accent border-r-1 border-gray-200">
             <ul className="h-full flex flex-col w-full  px-2">
                 {MENU_ITEMS.map((item) => {
                     return (
