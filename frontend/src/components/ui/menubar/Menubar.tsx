@@ -16,8 +16,8 @@ export type MenubarType = {
 }
 
 export function Menubar() {
-    const currentPath = usePathname()
-    const [activeMenu, setActiveMenu] = useState<MenubarType['href']>(currentPath)
+    const currentPath = usePathname();
+    const [activeMenu, setActiveMenu] = useState<MenubarType['href']>(currentPath);
     const onMenuItemClick = (menuLabel: MenubarType['href']) => {
         setActiveMenu(menuLabel)
     }
