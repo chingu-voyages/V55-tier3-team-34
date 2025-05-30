@@ -7,10 +7,10 @@ export const profileController = {
     const { profileId } = req.params;
     try {
       const foundProfile = await profileRepository().getProfileById(
-        parseInt(profileId),
+        parseInt(profileId,10),
       );
       res.status(200).json({
-        data: foundProfile,
+        data: foundProfile[0],
       });
     } catch (e) {
       if (e instanceof Error) {

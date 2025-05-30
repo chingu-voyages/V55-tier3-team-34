@@ -9,9 +9,9 @@ import bcrypt from 'bcrypt';
 export type PassportCallback = (error: any, user?: User) => void;
 
 export default (passport: PassportStatic) => {
-passport.serializeUser((user: any, done) => {
-  done(null, user.userId); // Only the user ID is stored in session
-});
+    passport.serializeUser((user: any, done) => {
+        done(null, user.userId);
+    });
 
 
   passport.deserializeUser(async (id: number, done) => {

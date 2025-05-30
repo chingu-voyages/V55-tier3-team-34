@@ -1,8 +1,8 @@
 
 export const navigationPaths = {
     projectsPage() { return   "/"},
-    profilesPage(){ return  "profiles" },
-    me(userId: string) {
-        return `profiles/${userId}`
+    profilesPage(){ return  "/profiles" },
+    profile(userId: string) {
+        return `/profiles/${userId}`
     }
 }

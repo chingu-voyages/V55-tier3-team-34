@@ -1,7 +1,7 @@
-import { users } from '../db/schema';
-import { db } from '../db/db';
-import { eq, sql } from 'drizzle-orm';
-import { UpdateUser } from '../db/schema/user';
+import {users} from '../db/schema';
+import {db} from '../db/db';
+import {eq , getTableColumns , sql} from 'drizzle-orm';
+import {UpdateUser} from '../db/schema/user';
 
 export const profileRepository = () => {
   const getAllProfiles = (limit: number, offset: number) => {
@@ -20,26 +20,11 @@ export const profileRepository = () => {
     });
   };
 
-  const getProfileById = (id: number) => {
-    return db.query.users.findFirst({
-      where: eq(users.userId, id),
-      columns: {
-        userId: true,
-        displayName: true,
-        firstname: true,
-        lastname: true,
-        bio: true,
-        avatarUrl: true,
-        githubUrl: true,
-      },
-      with: {
-        userVoyages: {
-          with: {
-            voyage: true,
-          },
-        },
-      },
-    });
+  const getProfileById = async (id: number) => {
+    const {password, ...rest} = getTableColumns(users);
+    return db.select({
+      ...rest ,
+    }).from(users).where(eq(users.userId , id));
   };
   const updateUserProfile = (userId: number, data: UpdateUser) => {
     return db
