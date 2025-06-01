@@ -1,4 +1,4 @@
-import {NewProjectInput , ProjectInsertData} from "../types/projects/schemas/projects";
+import {NewProjectInput , ProjectInsertData , UpdateProjectInput} from "../types/projects/schemas/projects";
 import {projectContributors , projects , projectTags , users} from "../db/schema";
 import {db} from "../db/db";
 import {eq , ilike , or} from "drizzle-orm";
@@ -42,7 +42,7 @@ export const projectsRepository = ()  =>{
             }
         });
     }
-    const updateProject = async (projectId: number, data: Partial<NewProjectInput>) => {
+    const updateProject = async (projectId: number, data: UpdateProjectInput) => {
         const [updated] = await db
             .update(projects)
             .set(data)
