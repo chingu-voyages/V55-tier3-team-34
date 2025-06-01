@@ -26,7 +26,7 @@ export const federatedCredentials = pgTable("federated_credentials", {
     provider: varchar({length: 50}).notNull(),
     providerUserId: varchar("provider_user_id", {length: 255}).notNull()
 }, (table) => ({
-    uniqueProviderUser: unique().on(table.provider, table.providerUserId)
+       uniqueProviderUser: unique().on(table.provider, table.providerUserId)
     })
 )
 
