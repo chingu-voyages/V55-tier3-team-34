@@ -9,9 +9,16 @@ export const profileController = {
       const foundProfile = await profileRepository().getProfileById(
         parseInt(profileId,10),
       );
-      res.status(200).json({
-        data: foundProfile[0],
-      });
+
+      if(Array.isArray(foundProfile) && foundProfile.length == 0) {
+         res.status(404).json({
+           error: "Profile not found"
+         })
+      }else {
+        res.status(200).json({
+          data: foundProfile[0],
+        });
+      }
     } catch (e) {
       if (e instanceof Error) {
         res.status(500).json({

@@ -42,5 +42,5 @@ Content-Type: application/json
 Cookie: connect.sid=s%3A37ZLNEqe_cvPGHuL_npycbfXI4VYS3Pv.cZTgev7umsp0MNk5skL0hRo%2FAGiTO%2BPp67sLLjKy9BU
 
 ###
-GET http://localhost:3000/api/profiles/3
+GET http://localhost:3000/api/profiles/30
 Content-Type: application/json
