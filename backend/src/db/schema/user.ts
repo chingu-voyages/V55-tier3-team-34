@@ -1,8 +1,7 @@
 import {integer , pgTable , unique , varchar} from "drizzle-orm/pg-core";
 import {createInsertSchema , createUpdateSchema} from "drizzle-zod";
 import {relations} from "drizzle-orm";
-import { userVoyages } from "./user_voyages";
-import { voyages } from "./voyages";
+
 
 
 import {timestamps} from "../columns.helpers";
@@ -34,7 +33,6 @@ export const federatedCredentials = pgTable("federated_credentials", {
 
 export const usersRelations = relations(users, ({many}) =>({
     federatedCredentials: many(federatedCredentials),
-    userVoyages: many(userVoyages)
 }))
 
 export const federatedCredentialsUsersRelation = relations(federatedCredentials, ({one}) => ({
@@ -44,16 +42,7 @@ export const federatedCredentialsUsersRelation = relations(federatedCredentials,
     })
 }))
 
-export const userVoyagesRelations = relations(userVoyages, ({ one }) => ({
-  user: one(users, {
-    fields: [userVoyages.userId],
-    references: [users.userId]
-  }),
-  voyage: one(voyages, {
-    fields: [userVoyages.voyageId],
-    references: [voyages.voyageId]
-  })
-}));
+
 
 export const userCreateSchema = createInsertSchema(users);
 export const userUpdateSchema = createUpdateSchema(users)
