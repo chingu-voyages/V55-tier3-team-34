@@ -4,6 +4,7 @@ import {users} from "./user";
 import {relations} from "drizzle-orm";
 import {tags} from "./tags";
 import {roles} from "./roles";
+import {createInsertSchema , createUpdateSchema} from "drizzle-zod";
 
 
 export const projects = pgTable('projetcs', {
@@ -47,5 +48,9 @@ export const projectTags = pgTable('project_tags', {
     projectId: integer('project_id').references(() => projects.projectId),
     tagId: integer('tag_id').references(() => tags.tagId)
 })
+
+export const createProjectSchema = createInsertSchema(projects);
+export const updateProjectSchema = createUpdateSchema(projects);
+
 
 

@@ -4,6 +4,7 @@ import {relations} from "drizzle-orm";
 import { userVoyages } from "./user_voyages";
 import { voyages } from "./voyages";
 
+
 import {timestamps} from "../columns.helpers";
 
 
@@ -54,7 +55,7 @@ export const userVoyagesRelations = relations(userVoyages, ({ one }) => ({
   })
 }));
 
-export const userCreateSchema = createInsertSchema(users)
+export const userCreateSchema = createInsertSchema(users);
 export const userUpdateSchema = createUpdateSchema(users)
 export type UpdateUser = Partial<typeof users.$inferInsert>
 export type User = typeof users.$inferSelect;
