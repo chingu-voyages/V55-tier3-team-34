@@ -8,6 +8,7 @@ export const projectController = {
     createProject: async (req: Request, res: Response, next: NextFunction) => {
         try {
             const data: NewProjectInput = req.body;
+            console.log(data)
             const project = await repo.createProject(data);
             res.status(201).json({ data: project });
         } catch (e) {

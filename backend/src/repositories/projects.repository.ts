@@ -1,36 +1,36 @@
-import {NewProjectInput} from "../types/projects/schemas/projects";
+import {NewProjectInput , ProjectInsertData} from "../types/projects/schemas/projects";
 import {projectContributors , projects , projectTags , users} from "../db/schema";
 import {db} from "../db/db";
-import {eq , or} from "drizzle-orm";
-import {inArray} from "drizzle-orm/sql/expressions/conditions";
+import {eq , ilike , or} from "drizzle-orm";
+
+
 
 
 export const projectsRepository = ()  =>{
     const createProject = async (data: NewProjectInput) => {
-        const {
-            teammates,
-            tags,
-            ...rest
-        } = data;
-        return await db.transaction(async (dbx) =>{
-            const newProject = await insertProject(rest, dbx)
-            await addContributors(newProject.projectId, teammates, dbx);
+        try {
+            const { teammates, tags, ...rest } = data;
+            const projectData: ProjectInsertData = { ...rest };
+            const newProject = await insertProject(projectData);
+            if (teammates && teammates.length > 0) {
+                await addContributors(newProject.projectId, teammates);
+            }
             if (tags && tags.length > 0) {
-                await addProjectTags(newProject.projectId, tags, dbx);
+                await addProjectTags(newProject.projectId, tags);
             }
             return newProject;
-        })
-    }
-    const findUsersByIdentifiers = async (identifiers: { username?: string; email?: string }[]) => {
-        const emails = identifiers.filter(i => i.email).map(i => i.email!);
-        const usernames = identifiers.filter(i => i.username).map(i => i.username!);
-
+        } catch (error) {
+            console.error("Failed to create project:", error);
+            throw new Error("Failed to create project");
+        }
+    };
+    const findUsersByIdentifiers = async (identifiers: { keyword: string}) => {
         return db
             .select()
             .from(users)
             .where(or(
-                inArray(users.email , emails),
-                inArray(users.username , usernames))
+                ilike(users.email, identifiers.keyword ?? ""),
+                ilike(users.displayName, identifiers.keyword),)
             );
     }
      const getProjectById = async (id: number) =>  {
@@ -38,10 +38,7 @@ export const projectsRepository = ()  =>{
             where: eq(projects.projectId , id) ,
             with: {
                 tags: true,
-                projectContributors: {
-                    contributors: true,
-                    role: true
-                }
+                contributors: true
             }
         });
     }
@@ -67,35 +64,36 @@ export const projectsRepository = ()  =>{
 
 
 
-async function  insertProject (
-        data: Omit<NewProjectInput , "teammates" | "tags"> ,
-        tx: typeof tx
-    ) {
-        const [project] = await tx.insert(projects).values(data).returning();
-        return project;
-    }
+
+async function  insertProject(
+    data: ProjectInsertData ,
+) {
+    const [project] = await db.insert(projects).values([data]).returning()
+    return project;
+}
+
+
     async function addContributors(
     projectId: number,
     contributorIds: number[],
-    tx: typeof tx
+
 ){
     if (contributorIds.length === 0) return;
     const values = contributorIds.map((contributorId) => ({
         projectId,
         contributorId,
     }));
-    await tx.insert(projectContributors).values(values);
+    await db.insert(projectContributors).values(values);
 }
  async function  addProjectTags(
     projectId: number,
     tagIds: number[],
-    tx: typeof tx
 )  {
     const values = tagIds.map((tagId) => ({
         projectId,
         tagId,
     }));
-    await tx.insert(projectTags).values(values);
+    await db.insert(projectTags).values(values);
 }
 
 

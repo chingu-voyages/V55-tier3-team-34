@@ -1,4 +1,4 @@
-import {createProjectSchema} from "../../../db/schema/projects";
+import {createProjectSchema , projects} from "../../../db/schema/projects";
 import {z} from "zod";
 
 
@@ -10,3 +10,4 @@ export const fullProjectSubmitSchema = createProjectSchema.extend({
 
 export type NewProjectInput = z.infer<typeof fullProjectSubmitSchema>;
 export type UpdateProjectInput = Partial<NewProjectInput>;
+export type ProjectInsertData = typeof projects.$inferInsert;
