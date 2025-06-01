@@ -8,6 +8,7 @@ import setupPassport from "./lib/oauth/strategies/oauth.strategy";
 import config from "./config/config";
 import authRoutes from "./routes/auth.routes";
 import {profileRouter} from "./routes/profile.route";
+import projectRouter from "./routes/projects.route";
 
 
 const app = express();
@@ -38,11 +39,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     console.log('Session :', req.session, req.user);
     next();
 });
-app.use(errorHandler);
+//app.use(errorHandler);
 
 //Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/profiles', profileRouter)
+app.use('/api/profiles', profileRouter);
+app.use('/api/projects', projectRouter)
 
 export default app;
 
