@@ -12,7 +12,8 @@ interface Config {
     sessionSecret: string,
     successRedirect: string,
     failureRedirect: string,
-    clientUrl: string
+    clientUrl: string,
+    maxAge: number,
 }
 
 const BASE_URL = process.env.NODE_ENV == "development" ? "http://127.0.0.1:3000": ""
@@ -25,9 +26,10 @@ const config: Config = {
     githubClientId: process.env.GITHUB_CLIENT_ID || "",
     githubClientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     sessionSecret: process.env.SESSION_SECRET || "",
-    successRedirect: `${CLIENT_URL}/${process.env.SUCCESS_REDIRECT}` || "",
-    failureRedirect:  `${CLIENT_URL}/${process.env.FAILURE_REDIRECT}` || "",
+    successRedirect: `${CLIENT_URL}${process.env.SUCCESS_REDIRECT}` || "",
+    failureRedirect:  `${CLIENT_URL}${process.env.FAILURE_REDIRECT}` || "",
     clientUrl: CLIENT_URL || "",
+    maxAge: 1000 * 60 * 60 * 24 * 7
 };
 
 export default config;

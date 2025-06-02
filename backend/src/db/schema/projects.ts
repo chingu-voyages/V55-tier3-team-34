@@ -21,7 +21,7 @@ export const projects = pgTable('projects', {
 })
 
 export const projectContributors = pgTable('project_contributors', {
-    projectId: integer('project_id').references(() => projects.projectId),
+    projectId: integer('project_contributor_id').references(() => projects.projectId),
     contributorId: integer('contributor_id').references(() => users.userId),
     roleId: integer('role_id').references(() => roles.roleId),
 },
@@ -49,7 +49,7 @@ export const projectContributorsRelation = relations(projectContributors, ({one}
     })
 }))
 export const projectTags = pgTable('project_tags', {
-    projectId: integer('project_id').references(() => projects.projectId),
+    projectId: integer('project_tags_id').references(() => projects.projectId),
     tagId: integer('tag_id').references(() => tags.tagId)
 },(t) => [
     primaryKey({ columns: [t.projectId, t.tagId] })

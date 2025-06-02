@@ -10,7 +10,7 @@ import {timestamps} from "../columns.helpers";
 export const users = pgTable('users', {
     userId: integer("user_id").primaryKey().generatedAlwaysAsIdentity(),
     displayName: varchar("display_name",{ length: 256}),
-    email: varchar().notNull().unique(),
+    email: varchar().unique(),
     password: varchar("password", { length: 255 }),//
     firstname: varchar("firstname", { length: 255 }), //
     lastname: varchar("lastname", { length: 255 }), //

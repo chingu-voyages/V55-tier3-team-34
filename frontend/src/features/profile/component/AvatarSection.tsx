@@ -1,6 +1,6 @@
 import {UserProfile} from "@/types/server-response";
 import {UserAvatar} from "@/features/profile/component/UserAvatar";
-import {no_profile} from "@/features/profile/component/dropdown/UserMenu";
+import {no_profile} from "@/features/auth/components/dropdown/UserMenu";
 import {getAvatarFallback} from "@/utils/user-info";
 
 type AvatarSectionProps = {
