@@ -8,7 +8,7 @@ import {createProjectSchema , updateProjectSchema} from "../db/schema/projects";
 
 const projectRouter = Router();
 
-projectRouter.post("/", validateData(createProjectSchema),  projectController.createProject)
+projectRouter.post("/", ensureAuthenticated, validateData(createProjectSchema),  projectController.createProject)
 projectRouter.get("/", projectController.listProjects);
 
 projectRouter

@@ -3,34 +3,42 @@ import cors from "cors";
 import passport from "passport";
 import session from "express-session";
 
-import {errorHandler} from "./middleware/errorhandler.middleware";
 import setupPassport from "./lib/oauth/strategies/oauth.strategy";
 import config from "./config/config";
 import authRoutes from "./routes/auth.routes";
 import {profileRouter} from "./routes/profile.route";
 import projectRouter from "./routes/projects.route";
+import {errorHandler} from "./middleware/errorhandler.middleware";
 
 
 const app = express();
 
-setupPassport(passport);
+app.set('trust proxy', 1)
+
+
 //middleware
-app.use(express.json());
 app.use(cors({
     origin: config.clientUrl,
-    credentials: true
-}))
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+}));
+app.use(express.json());
 app.use(session({
     secret: config.sessionSecret,
     saveUninitialized: false,
     resave: false,
     cookie: {
+        priority: "high",
+        httpOnly: true,
+        maxAge: config.maxAge,
         secure: config.nodeEnv === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     }
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
+setupPassport(passport);
 
 
 
@@ -39,7 +47,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     console.log('Session :', req.session, req.user);
     next();
 });
-//app.use(errorHandler);
+app.use(errorHandler);
 
 //Routes
 app.use('/api/auth', authRoutes);

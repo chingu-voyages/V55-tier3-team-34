@@ -3,6 +3,7 @@ import {profileController} from "../controllers/profile.controller";
 import {userUpdateSchema} from "../db/schema/user";
 import {ensureAuthenticated} from "../middleware/auth.middleware";
 import {validateData} from "../middleware/validation.middleware";
+import {ZodSchema} from "zod";
 
 const profileRouter = Router()
 

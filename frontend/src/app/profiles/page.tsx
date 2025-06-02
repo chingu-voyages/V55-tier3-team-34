@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {getVoyagers} from "@/features/profile/api/get-voyagers";
 import {UserAvatar} from "@/features/profile/component/UserAvatar";
-import {no_profile} from "@/features/profile/component/dropdown/UserMenu";
+import {no_profile} from "@/features/auth/components/dropdown/UserMenu";
 import {getAvatarFallback , getDisplayName} from "@/utils/user-info";
 import {navigationPaths} from "@/config/navigation";
 import {UserProfile} from "@/types/server-response";

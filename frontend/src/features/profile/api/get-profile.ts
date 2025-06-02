@@ -10,6 +10,4 @@ export const getVoyagerProfile = async (userId: string): Promise<AsyncFnResponse
 
 
 
-export const getAuthenticatedUser = async ():Promise<AsyncFnResponse<GetAuthUserResponse>> => {
-    return handleAsync(() =>  api.get('/auth/me'))
-}
+
