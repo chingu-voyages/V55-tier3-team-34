@@ -4,8 +4,8 @@ import {users} from "./user";
 import {relations} from "drizzle-orm";
 import {tags} from "./tags";
 import {roles} from "./roles";
-import {createInsertSchema , createUpdateSchema} from "drizzle-zod";
-import {z} from "zod";
+import {createInsertSchema , createSchemaFactory , createUpdateSchema} from "drizzle-zod";
+import {z , ZodSchema} from "zod";
 
 
 export const projects = pgTable('projects', {
@@ -21,7 +21,7 @@ export const projects = pgTable('projects', {
 })
 
 export const projectContributors = pgTable('project_contributors', {
-    projectId: integer('project_contributor_id').references(() => projects.projectId),
+    projectId: integer('project_id').references(() => projects.projectId),
     contributorId: integer('contributor_id').references(() => users.userId),
     roleId: integer('role_id').references(() => roles.roleId),
 },
@@ -49,7 +49,7 @@ export const projectContributorsRelation = relations(projectContributors, ({one}
     })
 }))
 export const projectTags = pgTable('project_tags', {
-    projectId: integer('project_tags_id').references(() => projects.projectId),
+    projectId: integer('project_id').references(() => projects.projectId),
     tagId: integer('tag_id').references(() => tags.tagId)
 },(t) => [
     primaryKey({ columns: [t.projectId, t.tagId] })
@@ -66,10 +66,7 @@ export const projectTagsRelation = relations(projectTags, ({many, one}) => ({
     }),
 }))
 
-export const createProjectSchema = createInsertSchema(projects, {
-    teammates: z.array(z.number()).min(1, "At least one teammate is required"),
-    tags: z.array(z.number()).optional()
-});
+
 export const updateProjectSchema = createUpdateSchema(projects);
 
 

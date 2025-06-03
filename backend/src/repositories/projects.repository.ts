@@ -68,12 +68,13 @@ export const projectsRepository = ()  =>{
 async function  insertProject(
     data: ProjectInsertData ,
 ) {
-    const [project] = await db.insert(projects).values([data]).returning()
+
+    const [project] = await db.insert(projects).values(data).returning()
     return project;
 }
 
 
-    async function addContributors(
+async function addContributors(
     projectId: number,
     contributorIds: number[],
 
@@ -83,7 +84,12 @@ async function  insertProject(
         projectId,
         contributorId,
     }));
-    await db.insert(projectContributors).values(values);
+    try{
+        await db.insert(projectContributors).values(values);
+    }catch (e) {
+        console.error(e)
+    }
+
 }
  async function  addProjectTags(
     projectId: number,
