@@ -50,8 +50,9 @@ router.post('/signup', (req: Request, res: Response) => {
 router.get('/github', passport.authenticate('github', { scope: ['user:email']}))
 router.get("/github/callback", passport.authenticate('github', {
     failureRedirect: config.failureRedirect,
-    successRedirect: config.successRedirect,
-}))
+}), (req: Request, res: Response) => {
+    res.redirect(config.successRedirect)
+})
 router.get('/me', ensureAuthenticated, (req: Request, res: Response) => {
     res.status(200).json({
         data: req.user

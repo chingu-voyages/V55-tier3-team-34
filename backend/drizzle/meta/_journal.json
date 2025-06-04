@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1747999420129,
-      "tag": "0000_naive_marvel_boy",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1748000429170,
-      "tag": "0001_redundant_diamondback",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1748003443082,
-      "tag": "0002_known_maria_hill",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1748011419517,
-      "tag": "0003_spotty_dagger",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1748279613818,
-      "tag": "0004_closed_pixie",
+      "when": 1748889417527,
+      "tag": "0000_dear_thunderbird",
       "breakpoints": true
     }
   ]

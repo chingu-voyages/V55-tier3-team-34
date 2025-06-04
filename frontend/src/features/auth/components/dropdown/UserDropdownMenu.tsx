@@ -4,11 +4,10 @@ import {
     DropdownMenuSeparator ,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {UserMenu} from "@/features/profile/component/dropdown/UserMenu";
-import {AccountInfo} from "@/features/profile/component/dropdown/AccountInfo";
-import {MyProfile} from "@/features/profile/component/dropdown/item/MyProfile";
-import Link from "next/link";
-import {envVars} from "@/config/env";
+import {UserMenu} from "@/features/auth/components/dropdown/UserMenu";
+import {AccountInfo} from "@/features/auth/components/dropdown/AccountInfo";
+import {MyProfile} from "@/features/auth/components/dropdown/item/MyProfile";
+import {GithubLoginButton} from "@/features/auth/components/GithubLoginButton";
 
 
 
@@ -28,13 +27,11 @@ export function UserDropdownMenu() {
                    <AccountInfo />
                </DropdownMenuLabel>
                <DropdownMenuSeparator />
-               <DropdownMenuItem className="w-62  cursor-pointer" asChild >
+               <DropdownMenuItem className="w-62  cursor-pointer"  >
                    <MyProfile />
                </DropdownMenuItem>
-               <DropdownMenuItem className="w-62  cursor-pointer" asChild >
-                   <Link href={`${envVars.API_URL}/auth/github`}>
-                         Login
-                   </Link>
+               <DropdownMenuItem className="w-62  cursor-pointer"  >
+                   <GithubLoginButton />
                </DropdownMenuItem>
            </DropdownMenuContent>
        </DropdownMenu>

@@ -3,7 +3,8 @@ import {projectController} from "../controllers/projects.controller";
 import {ensureAuthenticated} from "../middleware/auth.middleware";
 
 import {validateData} from "../middleware/validation.middleware";
-import {createProjectSchema , updateProjectSchema} from "../db/schema/projects";
+import { updateProjectSchema} from "../db/schema/projects";
+import {createProjectSchema} from "../types/projects/schemas/projects";
 
 
 const projectRouter = Router();

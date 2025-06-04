@@ -3,13 +3,13 @@ POST http://localhost:3000/api/projects
 Content-Type: application/json
 
 {
-  "titl": "Awesome Seed Project 1",
-  "shortDescriptio": "Created via seeding script 1",
-  "longDescriptio": "This is a full description of the project 1",
-  "voyag": 55,
+  "title": "Awesome Seed Project 1",
+  "shortDescription": "Created via seeding script 1",
+  "longDescription": "This is a full description of the project 1",
+  "voyage": 55,
   "tier": 3,
   "mainImageUrl": "https://image.com",
   "githubRepo": "https://github.com/example/awesome-project",
-  "teammates": [3, 4,5],
-  "tags": [1,2]
+  "teammates": [3,4,5],
+  "tags": [1]
 }
