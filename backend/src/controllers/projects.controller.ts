@@ -62,4 +62,20 @@ export const projectController = {
             });
         }
     },
+    searchTeammates: async (req: Request, res: Response, next: NextFunction) => {
+        const query = req.query;
+        const search = query.search as string
+
+        try {
+            const teammates = await repo.findUsersByIdentifiers(
+                 search
+            )
+            res.status(200).json({ data: teammates });
+        } catch (e) {
+            console.error('Search teammates error:', e);
+            res.status(500).json({
+                message: e instanceof Error ? e.message : "Failed to search teammates",
+            });
+        }
+    }
 };

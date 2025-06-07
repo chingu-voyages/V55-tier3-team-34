@@ -15,5 +15,7 @@ projectRouter.get("/", projectController.listProjects);
 projectRouter
     .get("/:projectId", projectController.getProjectById)
     .put("/:projectId",ensureAuthenticated, validateData(updateProjectSchema), projectController.updateProject);
+projectRouter
+    .get("/search/teammates", projectController.searchTeammates)
 
 export default projectRouter;
