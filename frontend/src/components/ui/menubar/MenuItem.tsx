@@ -21,6 +21,7 @@ export function MenuItem({
         <Link
             href={item.href}
             className={`w-full ${item.classname}`}
+            prefetch
         >
             <Button
                 variant={"primary"}

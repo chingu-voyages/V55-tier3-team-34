@@ -1,11 +1,11 @@
 import {UserProfile} from "@/types/server-response";
 
 export function getDisplayName(user: UserProfile) {
-    if (user.displayName) return user.displayName;
-    if (user.firstname && user.lastname) {
+    if (user?.displayName) return user.displayName;
+    if (user?.firstname && user?.lastname) {
         return `${user.firstname} ${user.lastname}`;
     }
-    if (user.firstname) return user.firstname;
+    if (user?.firstname) return user.firstname;
     return 'Anonymous Voyager';
 }
 

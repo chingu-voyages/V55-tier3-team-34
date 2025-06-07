@@ -9,6 +9,7 @@ import authRoutes from "./routes/auth.routes";
 import {profileRouter} from "./routes/profile.route";
 import projectRouter from "./routes/projects.route";
 import {errorHandler} from "./middleware/errorhandler.middleware";
+import {tagRouter} from "./routes/tag.route";
 
 
 const app = express();
@@ -52,7 +53,8 @@ app.use(errorHandler);
 //Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profiles', profileRouter);
-app.use('/api/projects', projectRouter)
+app.use('/api/projects', projectRouter);
+app.use('/api/tags', tagRouter);
 
 export default app;
 

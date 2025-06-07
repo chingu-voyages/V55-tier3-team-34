@@ -1,5 +1,6 @@
 "use client"
 import {Button} from "@/components/ui/button";
+import {LogInIcon} from "lucide-react";
 
 
 export const GithubLoginButton = () => {
@@ -8,10 +9,13 @@ export const GithubLoginButton = () => {
     }
      return(
          <Button
-             className="w-full "
+             className="w-24"
              onClick={handleGithubLogin}
-             variant="ghost">
-             Login with github
+             variant="outline">
+             Login
+             <LogInIcon />
          </Button>
      )
 }
+
+

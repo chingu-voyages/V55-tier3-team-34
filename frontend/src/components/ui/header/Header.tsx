@@ -4,12 +4,12 @@ import {ChinguAsyncLogo} from "@/components/ui/logo";
 import React , {useEffect} from "react";
 import {getAuthenticatedUser} from "@/features/auth/api/get-auth-user";
 import {useAuthStore} from "@/store/authStore";
+import {GithubLoginButton} from "@/features/auth/components/GithubLoginButton";
 
 
 export default function Header() {
     const fetchUser = useAuthStore((state) => state.fetchUser)
     const user = useAuthStore(state => state.user)
-    console.log(user);
     useEffect(() => {
         fetchUser()
     }, [])
@@ -18,8 +18,8 @@ export default function Header() {
             <div className="mb-2">
                 <ChinguAsyncLogo />
             </div>
-            <div className="p">
-                <UserDropdownMenu />
+            <div className="p w-fit">
+                {user ?   <UserDropdownMenu user={user} /> : <GithubLoginButton /> }
             </div>
         </div>
     )

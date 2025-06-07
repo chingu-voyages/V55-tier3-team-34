@@ -34,7 +34,9 @@ export const projectsRepository = ()  =>{
                 displayName: users.displayName,
                 firstname: users.firstname,
                 lastname: users.lastname,
+                avatarUrl: users.avatarUrl,
              })
+
           .from(users)
           .where(or(
               ilike(users.displayName, pattern),
@@ -44,6 +46,7 @@ export const projectsRepository = ()  =>{
               ilike(sql`CONCAT(${users.firstname}, ' ', ${users.lastname})`, pattern),
               ilike(sql`CONCAT(${users.lastname}, ' ', ${users.firstname})`, pattern)
           ))
+            .limit(5)
     };
      const getProjectById = async (id: number) =>  {
          return await db.query.projects.findFirst({

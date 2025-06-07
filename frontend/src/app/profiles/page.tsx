@@ -7,6 +7,7 @@ import {no_profile} from "@/features/auth/components/dropdown/UserMenu";
 import {getAvatarFallback , getDisplayName} from "@/utils/user-info";
 import {navigationPaths} from "@/config/navigation";
 import {UserProfile} from "@/types/server-response";
+import React from "react";
 
 
 
@@ -15,13 +16,11 @@ export default async function VoyagerListPage() {
     const [response, error] = await  getVoyagers();
     const users = response?.data ?? []
     return (
-        <div className="w-full p-4 ">
-            <div className="bg-gradient-to-r from-accent-100 via-pink-100 to-tertiary-100 p-6 rounded-2xl shadow mb-6">
-                <h1 className="text-3xl font-bold text-accent">🌟 Chingu Voyagers</h1>
-                <p className="text-gray-700 mt-2 max-w-2xl">
-                    Meet the amazing developers from the Chingu community who are leveling up their skills
-                    through real-world collaboration, open source contributions, and building together.
-                </p>
+        <div className="w-full p-6 ">
+            <div className="mb-8">
+                <h1 className="text-3xl font-bold text-gray-900 mb-2"> Chingu Voyager</h1>
+                <p className="text-gray-600">Meet the amazing developers from the Chingu community who are leveling up their skills
+                    through real-world collaboration, open source contributions, and building together.</p>
             </div>
             <div className="py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {users.map((user) => (
@@ -45,7 +44,7 @@ export function VoyagerCard({user}: VoyagerCardProps) {
             </CardContent>
             <CardFooter>
                 <Link className="w-full" href={navigationPaths.profile(user.userId)}>
-                    <Button variant="primary" className="w-full cursor-pointer">View Profile</Button>
+                    <Button variant="outline"  className="w-full cursor-pointer">View Profile</Button>
                 </Link>
             </CardFooter>
         </Card>
