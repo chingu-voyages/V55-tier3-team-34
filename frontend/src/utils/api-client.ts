@@ -43,18 +43,20 @@ export async function apiCall<T>(
      const BASE_URL = envVars.API_URL
      const API_URL = buildUrlWithParams(`${BASE_URL}${url}`, params);
      const isFormData = body instanceof FormData;
-        const response = await fetch(`${API_URL}`, {
-            method,
-            credentials: "include",
-            headers: {
-                ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
-                Accept: 'application/json',
-                ...headers,
-            },
-            next,
-            cache,
-        });
-        if (!response.ok) {
+    const response = await fetch(API_URL, {
+        method,
+        credentials: "include",
+        headers: {
+            ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+            Accept: 'application/json',
+            ...headers,
+        },
+        body: isFormData ? body : body ? JSON.stringify(body) : undefined,
+        next,
+        cache,
+    });
+
+    if (!response.ok) {
             const message = (await response.json()).message || response.statusText;
             throw new Error(message);
         }

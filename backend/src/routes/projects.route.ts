@@ -9,11 +9,14 @@ import {createProjectSchema} from "../types/projects/schemas/projects";
 
 const projectRouter = Router();
 
-projectRouter.post("/", validateData(createProjectSchema),  projectController.createProject)
+projectRouter.post("/", ensureAuthenticated, validateData(createProjectSchema),  projectController.createProject)
+
 projectRouter.get("/", projectController.listProjects);
 
 projectRouter
     .get("/:projectId", projectController.getProjectById)
     .put("/:projectId",ensureAuthenticated, validateData(updateProjectSchema), projectController.updateProject);
+projectRouter
+    .get("/search/teammates", projectController.searchTeammates)
 
 export default projectRouter;

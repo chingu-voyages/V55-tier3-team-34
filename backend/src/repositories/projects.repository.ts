@@ -1,7 +1,7 @@
 import {NewProjectInput , ProjectInsertData , UpdateProjectInput} from "../types/projects/schemas/projects";
 import {projectContributors , projects , projectTags , users} from "../db/schema";
 import {db} from "../db/db";
-import {eq , ilike , or} from "drizzle-orm";
+import {eq , ilike , or , sql} from "drizzle-orm";
 
 
 
@@ -24,15 +24,30 @@ export const projectsRepository = ()  =>{
             throw new Error("Failed to create project");
         }
     };
-    const findUsersByIdentifiers = async (identifiers: { keyword: string}) => {
+    const findUsersByIdentifiers = async (keyword: string ) => {
+        const pattern = `%${keyword.trim()}%`;
+        console.log(pattern)
         return db
-            .select()
-            .from(users)
-            .where(or(
-                ilike(users.email, identifiers.keyword ?? ""),
-                ilike(users.displayName, identifiers.keyword),)
-            );
-    }
+          .select({
+                userId: users.userId,
+                email: users.email,
+                displayName: users.displayName,
+                firstname: users.firstname,
+                lastname: users.lastname,
+                avatarUrl: users.avatarUrl,
+             })
+
+          .from(users)
+          .where(or(
+              ilike(users.displayName, pattern),
+              ilike(users.email, pattern),
+              ilike(users.firstname, pattern),
+              ilike(users.lastname, pattern),
+              ilike(sql`CONCAT(${users.firstname}, ' ', ${users.lastname})`, pattern),
+              ilike(sql`CONCAT(${users.lastname}, ' ', ${users.firstname})`, pattern)
+          ))
+            .limit(5)
+    };
      const getProjectById = async (id: number) =>  {
          return await db.query.projects.findFirst({
             where: eq(projects.projectId , id) ,
@@ -58,7 +73,8 @@ export const projectsRepository = ()  =>{
         getProjectById,
         createProject,
         listProjects,
-        updateProject
+        updateProject,
+        findUsersByIdentifiers
     }
 }
 

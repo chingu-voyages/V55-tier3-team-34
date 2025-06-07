@@ -16,30 +16,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chingu Project Showcase",
-  description: "A central hub to host past chingu voyages",
+    title: "Chingu Project Showcase",
+    description: "A central hub to host past chingu voyages",
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-          <div className="w-full h-screen flex flex-col overflow-y-hidden">
-              <Header />
-              <div className="w-full h-dvh flex">
-                  <Menubar />
-                  <main className="w-full h-full">
-                      {children}
-                  </main>
-              </div>
-          </div>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+        <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+        <div className="w-full h-screen flex flex-col">
+            <Header />
+            <div className="w-full flex-1 flex overflow-hidden">
+                <Menubar />
+                <main className="flex-1 overflow-y-auto">
+                    {children}
+                </main>
+            </div>
+        </div>
+        </body>
+        </html>
+    );
 }

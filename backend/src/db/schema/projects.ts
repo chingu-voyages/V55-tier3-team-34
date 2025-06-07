@@ -4,8 +4,8 @@ import {users} from "./user";
 import {relations} from "drizzle-orm";
 import {tags} from "./tags";
 import {roles} from "./roles";
-import {createInsertSchema , createSchemaFactory , createUpdateSchema} from "drizzle-zod";
-import {z , ZodSchema} from "zod";
+import {createUpdateSchema} from "drizzle-zod";
+
 
 
 export const projects = pgTable('projects', {

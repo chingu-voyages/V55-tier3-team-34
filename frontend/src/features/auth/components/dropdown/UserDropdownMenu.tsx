@@ -7,7 +7,8 @@ import {
 import {UserMenu} from "@/features/auth/components/dropdown/UserMenu";
 import {AccountInfo} from "@/features/auth/components/dropdown/AccountInfo";
 import {MyProfile} from "@/features/auth/components/dropdown/item/MyProfile";
-import {GithubLoginButton} from "@/features/auth/components/GithubLoginButton";
+import LogoutButton from "@/features/auth/components/LogoutButton";
+import {UserProfile} from "@/types/server-response";
 
 
 
@@ -16,22 +17,27 @@ import {GithubLoginButton} from "@/features/auth/components/GithubLoginButton";
 
 
 
-export function UserDropdownMenu() {
+
+interface UserDropdownMenuProps {
+    user: UserProfile
+}
+export function UserDropdownMenu({user}: UserDropdownMenuProps) {
+
    return(
        <DropdownMenu>
            <DropdownMenuTrigger>
-               <UserMenu />
+               <UserMenu user={user} />
            </DropdownMenuTrigger>
            <DropdownMenuContent>
                <DropdownMenuLabel>
-                   <AccountInfo />
+                   <AccountInfo user={user} />
                </DropdownMenuLabel>
                <DropdownMenuSeparator />
                <DropdownMenuItem className="w-62  cursor-pointer"  >
-                   <MyProfile />
+                   <MyProfile user={user} />
                </DropdownMenuItem>
                <DropdownMenuItem className="w-62  cursor-pointer"  >
-                   <GithubLoginButton />
+                   <LogoutButton />
                </DropdownMenuItem>
            </DropdownMenuContent>
        </DropdownMenu>
