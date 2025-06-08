@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
         domains: [
             'user-images.githubusercontent.com',
             'avatars.githubusercontent.com',
+            "repository-images.githubusercontent.com",
             'github.com'
         ]
     }

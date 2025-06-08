@@ -48,7 +48,6 @@ export const ProjectInfoSection: React.FC<ProjectInfoSectionProps> = ({
                     </Label>
                     <Input
                         {...register('title')}
-                        id="title"
                         placeholder="Enter your project title"
                         maxLength={150}
                         className={errors.title ? 'border-red-500' : ''}
