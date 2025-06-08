@@ -1,6 +1,7 @@
 import {integer , pgTable , varchar} from "drizzle-orm/pg-core";
 import {relations} from "drizzle-orm";
-import {projects , projectTags} from "./projects";
+import {projectTags} from "./projects-tags";
+
 
 export const tags = pgTable('tags', {
     tagId: integer("tag_id").primaryKey().generatedAlwaysAsIdentity(),
@@ -10,3 +11,6 @@ export const tags = pgTable('tags', {
 export const tagsRelation = relations(tags, ({ many }) => ({
     projectTags: many(projectTags),
 }));
+
+
+

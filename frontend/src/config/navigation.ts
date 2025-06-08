@@ -4,5 +4,6 @@ export const navigationPaths = {
     profilesPage(){ return  "/profiles" },
     profile(userId: string) {
         return `/profiles/${userId}`
-    }
+    },
+    createProject() { return "/projects/create"}
 }
