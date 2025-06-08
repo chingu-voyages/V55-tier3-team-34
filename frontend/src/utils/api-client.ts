@@ -42,6 +42,7 @@ export async function apiCall<T>(
     } = options;
      const BASE_URL = envVars.API_URL
      const API_URL = buildUrlWithParams(`${BASE_URL}${url}`, params);
+     console.log(API_URL)
      const isFormData = body instanceof FormData;
     const response = await fetch(API_URL, {
         method,
