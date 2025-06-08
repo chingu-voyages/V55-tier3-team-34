@@ -66,7 +66,29 @@ export const projectsRepository = ()  =>{
         return updated;
     };
     const listProjects = async () => {
-        return db.select().from(projects);
+        return db.query.projects.findMany({
+            with: {
+                contributors: {
+                    columns: {},
+                    with: {
+                        contributor:{
+                            columns: {
+                                userId: true,
+                                displayName: true,
+                                firstname: true,
+                                lastname: true,
+                            }
+                        },
+                        role: true
+                    }
+                },
+                tags: {
+                    with: {
+                        tag: true
+                    }
+                }
+            }
+        });
     };
 
     return {

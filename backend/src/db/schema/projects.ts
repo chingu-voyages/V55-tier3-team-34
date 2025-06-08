@@ -2,9 +2,9 @@ import {integer , pgTable , primaryKey , varchar} from "drizzle-orm/pg-core";
 import {timestamps} from "../columns.helpers";
 import {users} from "./user";
 import {relations} from "drizzle-orm";
-import {tags} from "./tags";
 import {roles} from "./roles";
 import {createUpdateSchema} from "drizzle-zod";
+import {projectTags} from "./projects-tags";
 
 
 
@@ -47,23 +47,6 @@ export const projectContributorsRelation = relations(projectContributors, ({one}
         fields: [projectContributors.roleId],
         references: [roles.roleId]
     })
-}))
-export const projectTags = pgTable('project_tags', {
-    projectId: integer('project_id').references(() => projects.projectId),
-    tagId: integer('tag_id').references(() => tags.tagId)
-},(t) => [
-    primaryKey({ columns: [t.projectId, t.tagId] })
-])
-
-export const projectTagsRelation = relations(projectTags, ({many, one}) => ({
-    project: one(projects, {
-        fields: [projectTags.projectId],
-        references: [projects.projectId]
-    }),
-    tag: one(tags, {
-        fields: [projectTags.tagId],
-        references: [tags.tagId]
-    }),
 }))
 
 

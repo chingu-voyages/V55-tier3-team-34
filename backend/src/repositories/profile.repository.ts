@@ -16,6 +16,7 @@ export const profileRepository = () => {
         bio: true,
         avatarUrl: true,
         githubUrl: true,
+        createdAt: true
       },
     });
   };

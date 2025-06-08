@@ -1,6 +1,5 @@
 import {MayBe} from "@/utils/type";
-import {User} from "@/types/user";
-import {Tag} from "@/features/projects/constants/project-data";
+
 
 export interface Project {
     projectId: number
@@ -12,15 +11,23 @@ export interface Project {
     mainImageUrl: MayBe<string>
     githubRepo: MayBe<string>
     contributors: Array<{
-        projectId: number
-        contributorId: number
-        contributor: User
+        contributor: {
+            userId: number
+            displayName: string | null
+            firstname: string | null
+            lastname: string | null
+        }
+        role: string | null
     }>
     tags: Array<{
-        projectId: number | null
-        tagId: number | null
-        tag: Tag
+        projectId: number
+        tagId: number
+        tag: {
+            tagId: number
+            name: string
+        }
     }>
-    createdAt: Date
-    updatedAt: Date
+    createdAt: string
+    updatedAt: string | null
+    deletedAt: string | null
 }
