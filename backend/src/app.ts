@@ -10,6 +10,7 @@ import {profileRouter} from "./routes/profile.route";
 import projectRouter from "./routes/projects.route";
 import {errorHandler} from "./middleware/errorhandler.middleware";
 import {tagRouter} from "./routes/tag.route";
+import {requestLoggingMiddleware} from "./middleware/request-logging.middleware";
 
 
 const app = express();
@@ -43,11 +44,7 @@ setupPassport(passport);
 
 
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log('Cookies reçus :', req.cookies, req.user);
-    console.log('Session :', req.session, req.user);
-    next();
-});
+app.use(requestLoggingMiddleware);
 app.use(errorHandler);
 
 //Routes
