@@ -15,7 +15,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div key={project.projectId} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
             <div className="relative h-48 bg-gray-200">
                 <Image
-                    src={'/placeholder-project.jpg'}
+                    src={ project.mainImageUrl ?? '/placeholder-project.jpg'}
                     alt={project.title}
                     fill
                     className="object-cover"
@@ -63,13 +63,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
                             href={project.githubRepo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 bg-gray-900 text-white text-center py-2 px-4 rounded-md hover:bg-gray-800 transition-colors text-sm font-medium"
+                            className="flex-1 flex justify-center items-center bg-gray-900 text-white text-center py-2 px-4 rounded-md hover:bg-gray-800 transition-colors text-sm font-medium"
                         >
                             GitHub
                         </Link>
                     )}
                     <Button
-                        className="flex-1 bg-tertiary text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50"
+                        className="flex-1 bg-tertiary flex justify-center items-center text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50"
                         disabled
                     >
                         Live Demo
