@@ -1,6 +1,5 @@
 import {MayBe} from "@/utils/type";
-import {User} from "@/types/user";
-import {Tag} from "@/features/projects/constants/project-data";
+
 
 export interface Project {
     projectId: number

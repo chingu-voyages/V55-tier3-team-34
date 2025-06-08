@@ -17,7 +17,7 @@ export default async function ExplorePage({
                                           }: {
     params: Params
 }) {
-    const { search, sort, tier} = await params
+    const { search, tier} = await params
     const filterOptions = {
         search,
         tier

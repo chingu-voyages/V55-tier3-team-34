@@ -2,7 +2,6 @@ import {integer , pgTable , primaryKey , varchar} from "drizzle-orm/pg-core";
 import {timestamps} from "../columns.helpers";
 import {users} from "./user";
 import {relations} from "drizzle-orm";
-import {tags} from "./tags";
 import {roles} from "./roles";
 import {createUpdateSchema} from "drizzle-zod";
 import {projectTags} from "./projects-tags";

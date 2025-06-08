@@ -1,5 +1,5 @@
 import React from "react";
-import {VoyagerCard} from "@/app/profiles/(voyagers)/page";
+
 
 
 export default function VoyagersLayout({

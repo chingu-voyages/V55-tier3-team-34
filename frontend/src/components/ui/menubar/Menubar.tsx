@@ -5,7 +5,6 @@ import {IconProps} from "@radix-ui/react-icons/dist/types";
 import {MENU_ITEMS} from "@/config/menubar/menubar";
 import {usePathname} from "next/navigation";
 import {MenuItem} from "@/components/ui/menubar/MenuItem";
-import {ChinguAsyncLogo} from "@/components/ui/logo";
 import Link from "next/link";
 import {navigationPaths} from "@/config/navigation";
 import {Button} from "@/components/ui/button";
