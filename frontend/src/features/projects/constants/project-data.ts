@@ -35,16 +35,16 @@ export const TIERS: Tier[] = [
 ]
 
 export const INITIAL_VALUES: ProjectSubmissionFormData = {
-    githubRepo: "",
-    longDescription: "",
-    mainImageUrl: "",
-    shortDescription: "",
-    tags: [],
+    title: '',
+    shortDescription: '',
+    longDescription: '',
+    tier: 0,
+    voyage: 55,
+    mainImageUrl: '',
+    githubRepo: '',
     teammates: [],
-    tier: null,
-    title: "",
-    voyage: null
-}
+    tags: []
+};
 
 
 

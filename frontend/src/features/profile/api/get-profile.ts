@@ -1,6 +1,6 @@
 import {AsyncFnResponse , handleAsync} from "@/utils/handleAsync";
 import {api} from "@/utils/api-client";
-import {GetAuthUserResponse , GetProfileResponse} from "@/types/server-response";
+import {GetProfileResponse} from "@/types/server-response";
 
 
 

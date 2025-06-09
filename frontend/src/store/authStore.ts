@@ -14,7 +14,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     isLoggedIn: false,
     setUser: (user) => set({ user, isLoggedIn: !!user }),
     fetchUser: async () => {
-        const [data, err] = await getAuthenticatedUser();
+        const [data] = await getAuthenticatedUser();
         if(data) {
             set({user: data.data, isLoggedIn: true})
         }else {

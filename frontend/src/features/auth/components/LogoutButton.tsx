@@ -4,9 +4,10 @@ import {logoutUserAction} from "@/features/auth/api/logout-user";
 import {LogOut} from "lucide-react";
 import {Button} from "@/components/ui/button";
 
+
 export const LogoutButton = () => {
     const setUser = useAuthStore(state => state.setUser)
-    const { runAction: logout, isLoading } = useServerAction<void>(logoutUserAction)
+    const { runAction: logout, isLoading } = useServerAction<void, any>(logoutUserAction)
 
     const handleLogout = async () => {
         try {

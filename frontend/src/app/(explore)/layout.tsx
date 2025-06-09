@@ -1,4 +1,4 @@
-import React from "react";
+import React , {Suspense} from "react";
 import {ProjectSearch} from "@/features/projects/components/showcase/ProjectSearch";
 import ProjectFilter from "@/features/projects/components/showcase/ProjectFilter";
 
@@ -19,7 +19,9 @@ export default function ExploreLayout({
                   <ProjectSearch />
                   <ProjectFilter />
               </div>
-              {children}
+              <Suspense>
+                  { children}
+              </Suspense>
           </div>
     );
 }

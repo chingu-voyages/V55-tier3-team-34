@@ -1,10 +1,11 @@
 import {useCallback , useEffect , useState} from "react";
 import {Tag} from "@/features/projects/constants/project-data";
+import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
 
 interface UseSelectedTagsProps {
     tags?: Tag[];
     selectedTagIds: number[];
-    setFieldValue: (field: string, value: number[]) => void;
+    setFieldValue: (field: keyof ProjectSubmissionFormData, value: number[]) => void;
 }
 
 export const useSelectedTags = ({ tags, selectedTagIds, setFieldValue }: UseSelectedTagsProps) => {

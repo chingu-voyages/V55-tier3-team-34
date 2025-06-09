@@ -11,7 +11,7 @@ export function useUrlFilters() {
     }, [searchParams])
     
     const getAllFilters = useCallback(() => {
-        const filters = {}
+        const filters: Record<string , string> = {}
         for (const [key, value] of searchParams.entries()) {
             filters[key] = value
         }
@@ -32,12 +32,12 @@ export function useUrlFilters() {
         },
         [searchParams]
     )
-    const updateFilters = useCallback((updates) => {
+    const updateFilters = useCallback((updates: Record<string , string | undefined | null>) => {
         const queryString = createQueryString(updates)
         router.push(pathname + (queryString ? '?' + queryString : ''))
     }, [createQueryString, router, pathname])
     
-    const updateFilter = useCallback((key, value) => {
+    const updateFilter = useCallback((key: string, value: string) => {
         updateFilters({ [key]: value })
     }, [updateFilters])
 
@@ -46,8 +46,8 @@ export function useUrlFilters() {
         router.push(pathname)
     }, [router, pathname])
     
-    const clearSpecificFilters = useCallback((keys) => {
-        const updates = {}
+    const clearSpecificFilters = useCallback((keys: string[]) => {
+        const updates: Record<string , string> = {}
         keys.forEach(key => {
             updates[key] = ''
         })

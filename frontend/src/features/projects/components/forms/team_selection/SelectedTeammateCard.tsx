@@ -1,5 +1,4 @@
 import React from 'react'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
 import {UserAvatar} from "@/features/profile/component/UserAvatar";

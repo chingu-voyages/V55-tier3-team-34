@@ -89,7 +89,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                         <Button
                             asChild
                             variant="default"
-                            className="flex-1 bg-gray-900 hover:bg-gray-800 transition-colors"
+                            className="flex-1 bg-tertiary hover:bg-gray-800 transition-colors"
                         >
                             <Link
                                 href={project.githubRepo}
