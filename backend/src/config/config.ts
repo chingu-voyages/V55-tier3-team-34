@@ -17,7 +17,7 @@ interface Config {
 }
 
 const BASE_URL = process.env.NODE_ENV == "development" ? "http://127.0.0.1:3000": ""
-const CLIENT_URL = process.env.NODE_ENV == "development" ? process.env.CLIENT_URL : ""
+const CLIENT_URL = process.env.CLIENT_URL
 const config: Config = {
     port: Number(process.env.PORT) || 3000,
     nodeEnv: process.env.NODE_ENV || 'development',
