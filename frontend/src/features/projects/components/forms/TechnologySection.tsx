@@ -14,10 +14,6 @@ import {FieldErrors , UseFormSetValue} from "react-hook-form";
 
 
 
-interface Tag {
-    tagId: number;
-    name: string;
-}
 
 interface TechnologiesSectionProps {
     values: ProjectSubmissionFormData

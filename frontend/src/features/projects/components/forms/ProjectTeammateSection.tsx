@@ -8,7 +8,7 @@ import {SearchResultsDropdown} from "@/features/projects/components/forms/team_s
 import {ErrorDisplay} from "@/features/projects/components/ErrorDisplay";
 import {SelectedTeammates} from "@/features/projects/components/forms/team_selection/SelectedTeammate";
 import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
-import {Control , FieldErrors , UseFormSetValue} from "react-hook-form";
+import { FieldErrors , UseFormSetValue} from "react-hook-form";
 
 
 interface TeamMembersSectionProps {

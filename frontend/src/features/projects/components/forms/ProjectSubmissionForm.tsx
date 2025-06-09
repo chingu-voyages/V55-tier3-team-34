@@ -27,7 +27,6 @@ export default function ProjectSubmissionForm() {
         watch,
         setValue,
         control,
-        trigger
     } = useForm<ProjectSubmissionFormData>({
         resolver: yupResolver(projectSubmissionSchema),
         mode: 'onBlur',
