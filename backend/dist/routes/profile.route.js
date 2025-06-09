@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.profileRouter = void 0;
+const express_1 = require("express");
+const profile_controller_1 = require("../controllers/profile.controller");
+const user_1 = require("../db/schema/user");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const validation_middleware_1 = require("../middleware/validation.middleware");
+const profileRouter = (0, express_1.Router)();
+exports.profileRouter = profileRouter;
+profileRouter.get('/:profileId', profile_controller_1.profileController.getProfile);
+profileRouter.get('/', profile_controller_1.profileController.getProfiles);
+profileRouter.get('/me', auth_middleware_1.ensureAuthenticated, profile_controller_1.profileController.getMyProfile);
+profileRouter.put('/', auth_middleware_1.ensureAuthenticated, (0, validation_middleware_1.validateData)(user_1.userUpdateSchema), profile_controller_1.profileController.updateProfile);
+profileRouter.get('/projects/:userId', profile_controller_1.profileController.getUserProjects);
