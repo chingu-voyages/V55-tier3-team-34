@@ -1,6 +1,5 @@
-import React , {useMemo , useState} from 'react'
+import React , {useState} from 'react'
 import {Loader2 , Tag } from 'lucide-react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {useTags} from "@/features/projects/hooks/useTags";
 import {AvailableTechnologies} from "@/features/projects/components/forms/tech_selection/AvailableTech";
@@ -10,7 +9,8 @@ import {SearchTips} from "@/features/projects/components/forms/tech_selection/Se
 import {useSelectedTags} from "@/hooks/useSelectedTags";
 import {ErrorDisplay} from "@/features/projects/components/ErrorDisplay";
 import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
-import {FieldErrors} from "react-hook-form";
+import {FieldErrors , UseFormSetValue} from "react-hook-form";
+
 
 
 
@@ -22,7 +22,7 @@ interface Tag {
 interface TechnologiesSectionProps {
     values: ProjectSubmissionFormData
     errors: FieldErrors<ProjectSubmissionFormData>
-    setValue: (field: keyof ProjectSubmissionFormData, value: any) => void
+    setValue: UseFormSetValue<ProjectSubmissionFormData>;
 }
 export const TechnologiesSection: React.FC<TechnologiesSectionProps> = ({
                                                                             values,
@@ -37,7 +37,7 @@ export const TechnologiesSection: React.FC<TechnologiesSectionProps> = ({
     const { selectedTags, handleToggleTag, handleRemoveTag } = useSelectedTags({
         tags,
         selectedTagIds: values.tags as number[],
-        setFieldValue: setValue
+        setFieldValue: (field, value) => setValue(field, value)
     })
 
     const handleClearSearch = () => setSearchTerm('')
@@ -73,7 +73,7 @@ export const TechnologiesSection: React.FC<TechnologiesSectionProps> = ({
                         />
                         <AvailableTechnologies
                             filteredTags={tags}
-                            selectedTagIds={values.tags}
+                            selectedTagIds={values.tags as number[]}
                             onToggle={handleToggleTag}
                             searchTerm={searchTerm}
                             showAllTags={showAllTags}
@@ -84,7 +84,7 @@ export const TechnologiesSection: React.FC<TechnologiesSectionProps> = ({
                     </>
                 )}
 
-                {errors.tags && <ErrorDisplay error={errors.tags.message} />}
+                {errors.tags && <ErrorDisplay error={errors.tags?.message ?? ""} />}
             </CardContent>
         </Card>
     )

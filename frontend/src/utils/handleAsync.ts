@@ -9,7 +9,7 @@ export const handleAsync= async <T>(
     try {
         const response = await asyncFn()
         return [response, null]
-    }catch (e) {
+    }catch (e: any) {
         return [null, e]
     }
 }

@@ -28,7 +28,7 @@ export const useTags = (search: string) => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, [debouncedSearch, runAction]);
+    }, [debouncedSearch, runAction, setIsLoading]);
 
     return {
         data: tags,

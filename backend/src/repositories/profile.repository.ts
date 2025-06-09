@@ -1,6 +1,6 @@
-import {users} from '../db/schema';
+import {projectContributors , projects , projectTags , roles , tags , users} from '../db/schema';
 import {db} from '../db/db';
-import {eq , getTableColumns , sql} from 'drizzle-orm';
+import {and , eq , getTableColumns , sql} from 'drizzle-orm';
 import {UpdateUser} from '../db/schema/user';
 
 export const profileRepository = () => {
@@ -37,9 +37,46 @@ export const profileRepository = () => {
       .where(eq(users.userId, userId))
       .execute();
   };
+  async function getUserProjectsWithRoles(userId: number) {
+    return await db.query.projects.findMany({
+      where: (projects, { exists, and, eq }) =>
+          exists(
+              db.select({ projectId: projectContributors.projectId, contributorId: projectContributors.contributorId })
+                  .from(projectContributors)
+                  .where((pc) =>
+                      and(
+                          eq(pc.projectId, projects.projectId),
+                          eq(pc.contributorId, userId)
+                      )
+                  )
+          ),
+      with: {
+        contributors: {
+          columns: {},
+          with: {
+            contributor: {
+              columns: {
+                userId: true,
+                displayName: true,
+                firstname: true,
+                lastname: true,
+              },
+            },
+            role: true,
+          },
+        },
+        tags: {
+          with: {
+            tag: true,
+          },
+        },
+      },
+    });
+  }
   return {
     updateUserProfile,
     getAllProfiles,
     getProfileById,
+    getUserProjectsWithRoles,
   };
 };

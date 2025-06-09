@@ -8,14 +8,13 @@ import {SearchResultsDropdown} from "@/features/projects/components/forms/team_s
 import {ErrorDisplay} from "@/features/projects/components/ErrorDisplay";
 import {SelectedTeammates} from "@/features/projects/components/forms/team_selection/SelectedTeammate";
 import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
-import {Control , FieldErrors} from "react-hook-form";
+import {Control , FieldErrors , UseFormSetValue} from "react-hook-form";
 
 
 interface TeamMembersSectionProps {
     values: ProjectSubmissionFormData;
     errors: FieldErrors<ProjectSubmissionFormData>;
-    setValue: (field: keyof ProjectSubmissionFormData, value: any) => void;
-    control: Control<ProjectSubmissionFormData>;
+    setValue: UseFormSetValue<ProjectSubmissionFormData>;
 }
 
 export const TeamMembersSection: React.FC<TeamMembersSectionProps> = ({
@@ -34,7 +33,7 @@ export const TeamMembersSection: React.FC<TeamMembersSectionProps> = ({
         clearSearch,
         handleSearchFocus,
         handleSearchBlur
-    } = useTeammateSelection({ values, setFieldValue: setValue })
+    } = useTeammateSelection({ values, setFieldValue: (field, value) => setValue(field, value) })
 
     const { data: searchResults, isLoading, error } = useTeammateSearch(searchTerm)
 
@@ -57,7 +56,6 @@ export const TeamMembersSection: React.FC<TeamMembersSectionProps> = ({
                         onChange={setSearchTerm}
                         onFocus={handleSearchFocus}
                         onBlur={handleSearchBlur}
-                        isLoading={isLoading}
                         onClear={clearSearch}
                     />
                     <SearchResultsDropdown
@@ -75,7 +73,7 @@ export const TeamMembersSection: React.FC<TeamMembersSectionProps> = ({
                     onRemove={removeTeammate}
                 />
 
-                <ErrorDisplay error={errors.teammates?.message} />
+                <ErrorDisplay error={errors.teammates?.message ?? ""} />
             </CardContent>
         </Card>
     )

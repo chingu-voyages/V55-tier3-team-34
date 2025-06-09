@@ -17,7 +17,7 @@ export default function ProfileNotFound() {
                             Voyager Not Found
                         </h2>
                         <p className="text-gray-600 mb-6">
-                            The voyager profile you're looking for doesn't exist or may have been removed from our galaxy.
+                            The voyager profile you're looking for does not exist or may have been removed from our galaxy.
                         </p>
                     </div>
                 </CardContent>

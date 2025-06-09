@@ -13,8 +13,8 @@ export default function ProjectFilter() {
     const tiers = ["All Tiers", ...TIERS]
 
     useEffect(() => {
-        updateFilter("tier", selectedTier)
-    }, [selectedTier])
+        updateFilter("tier", String(selectedTier))
+    }, [selectedTier, updateFilter])
     return(
         <div className="flex gap-4">
             <Select  onValueChange={(value) => setSelectedTier(Number(value))}>

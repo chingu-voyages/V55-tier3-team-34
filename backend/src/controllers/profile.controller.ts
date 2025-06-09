@@ -52,8 +52,6 @@ export const profileController = {
     }
   },
 
-  // controllers/profile.controller.ts
-  // backend/src/controllers/profile.controller.ts
   getMyProfile: async (req: Request, res: Response) => {
     const user = req.user as User;
     try {
@@ -102,6 +100,22 @@ export const profileController = {
         });
       } else {
         res.status(500).json({ message: 'Failed to update profile' });
+      }
+    }
+  },
+  getUserProjects: async (req: Request, res: Response, next: NextFunction) => {
+    const {userId } = req.params as { userId: string }
+    try {
+      const projects = await  profileRepository().getUserProjectsWithRoles(Number(userId))
+      res.status(200).json({
+        data: projects,
+        message: "User projects retrieved successfully",
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        res.status(500).json({ message: e.message });
+      } else {
+        res.status(500).json({ message: "Failed to retrieve user projects" });
       }
     }
   },

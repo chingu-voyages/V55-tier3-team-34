@@ -2,7 +2,6 @@
 import {UserDropdownMenu} from "@/features/auth/components/dropdown/UserDropdownMenu";
 import {ChinguAsyncLogo} from "@/components/ui/logo";
 import React , {useEffect} from "react";
-import {getAuthenticatedUser} from "@/features/auth/api/get-auth-user";
 import {useAuthStore} from "@/store/authStore";
 import {GithubLoginButton} from "@/features/auth/components/GithubLoginButton";
 

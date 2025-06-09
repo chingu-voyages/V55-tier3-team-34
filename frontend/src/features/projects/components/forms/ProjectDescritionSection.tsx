@@ -1,16 +1,15 @@
 import React from 'react'
-import { Field } from 'formik'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
-import {Control , FieldErrors} from "react-hook-form";
+import {Control , FieldErrors , UseFormSetValue} from "react-hook-form";
 
 interface ProjectDescriptionSectionProps {
     values: ProjectSubmissionFormData;
     errors: FieldErrors<ProjectSubmissionFormData>;
     register: any;
-    setValue: (field: string, value: any) => void;
+    setValue: UseFormSetValue<ProjectSubmissionFormData>;
     control: Control<ProjectSubmissionFormData>;
 }
 

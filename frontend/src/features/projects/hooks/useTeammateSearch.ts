@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import {User} from "@/types/user";
 import {useDebounce} from "@/hooks/useDebounce";
 import useServerAction from "@/hooks/useServerAction";
-import {handleAsync} from "@/utils/handleAsync";
+import {AsyncFnResponse , handleAsync} from "@/utils/handleAsync";
 import {api} from "@/utils/api-client";
+import {GetSearchTeammateResponse} from "@/types/server-response";
 
 
-export const getAllTeammatesAction = (search: string) => {
+export const getAllTeammatesAction = (search: string): Promise<AsyncFnResponse<GetSearchTeammateResponse>> => {
     return handleAsync(() => api.get('/projects/search/teammates', { params: {search: search}}))
 }
 export const useTeammateSearch = (search: string) => {
@@ -29,7 +30,7 @@ export const useTeammateSearch = (search: string) => {
             .finally(() => {
                 setIsLoading(false)
             })
-    }, [debouncedSearch, runAction])
+    }, [debouncedSearch, runAction, setIsLoading])
 
     return {
         data: teammates,

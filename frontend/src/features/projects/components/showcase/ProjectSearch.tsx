@@ -11,12 +11,11 @@ export function ProjectSearch() {
     const [searchTerm, setSearchTerm] = useState(getFilter('search'));
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
     useEffect(() => {
-         updateFilter('search', searchTerm)
-        }, [debouncedSearchTerm])
+         updateFilter('search', debouncedSearchTerm)
+        }, [debouncedSearchTerm, updateFilter])
     return(
         <div className="w-full flex-1">
             <SearchInput
-                type="text"
                 placeholder="Search projects, technologies..."
                 value={searchTerm}
                 onChange={(value) => setSearchTerm(value)}

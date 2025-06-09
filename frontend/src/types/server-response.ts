@@ -21,3 +21,5 @@ export type GetAuthUserResponse = ApiResponse<User>
 export type GetTagsResponse = ApiResponse<Tag[]>
 export type PostProjectResponse= ApiResponse<Project>
 export type GetProjectsResponse = ApiResponse<Project[]>
+export type GetUserProjectsResponse = ApiResponse<Project[]>
+export type GetSearchTeammateResponse = ApiResponse<User[]>

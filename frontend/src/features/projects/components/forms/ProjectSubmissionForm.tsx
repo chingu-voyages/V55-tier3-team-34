@@ -39,8 +39,7 @@ export default function ProjectSubmissionForm() {
     const onSubmit = async (data: ProjectSubmissionFormData) => {
         console.log('received data', data)
         setIsLoading(true);
-        const [response, error] = await runAction(data);
-        console.log(response, error)
+        await runAction(data);
         setIsLoading(false);
         reset();
     };
@@ -59,7 +58,6 @@ export default function ProjectSubmissionForm() {
                     register={register}
                     setValue={setValue}
                     control={control}
-                    trigger={trigger}
                 />
 
                 <ProjectDescriptionSection
@@ -68,25 +66,17 @@ export default function ProjectSubmissionForm() {
                     register={register}
                     control={control}
                     setValue={setValue}
-                    trigger={trigger}
                 />
-
                 <TeamMembersSection
                     values={values}
                     errors={errors}
-                    register={register}
                     setValue={setValue}
-                    control={control}
-                    trigger={trigger}
                 />
 
                 <TechnologiesSection
                     values={values}
                     errors={errors}
-                    register={register}
                     setValue={setValue}
-                    control={control}
-                    trigger={trigger}
                 />
 
                 <FormActions isSubmitting={isLoading && isSubmitting} />

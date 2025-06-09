@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 import {GitHubLogoIcon} from "@radix-ui/react-icons";
-import {Control , FieldErrors} from "react-hook-form";
+import {Control , FieldErrors , UseFormSetValue} from "react-hook-form";
 import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
 import {TIERS} from "@/features/projects/constants/project-data";
 
@@ -15,7 +15,7 @@ interface ProjectInfoSectionProps {
     values: ProjectSubmissionFormData;
     errors: FieldErrors<ProjectSubmissionFormData>;
     register: any;
-    setValue: (field: string, value: any) => void;
+    setValue: UseFormSetValue<ProjectSubmissionFormData>;
     control: Control<ProjectSubmissionFormData>;
 }
 
@@ -26,7 +26,6 @@ export const ProjectInfoSection: React.FC<ProjectInfoSectionProps> = ({
                                                                           errors,
                                                                           register,
                                                                           setValue,
-                                                                          control
                                                                       }) => {
     return (
         <Card>
@@ -62,8 +61,8 @@ export const ProjectInfoSection: React.FC<ProjectInfoSectionProps> = ({
                 <div>
                     <Label htmlFor="tier">Tier</Label>
                     <Select
-                        onValueChange={(value) => setValue('tier', value ? parseInt(value) : null)}
-                        value={values.tier?.toString() || ''}
+                        onValueChange={(value) => setValue('tier',  parseInt(value))}
+                        value={values.tier?.toString() || '0'}
                     >
                         <SelectTrigger>
                             <SelectValue placeholder="Select a tier" />
@@ -84,7 +83,7 @@ export const ProjectInfoSection: React.FC<ProjectInfoSectionProps> = ({
                     <Label htmlFor="voyage">Voyage Number</Label>
                     <Input
                         {...register('voyage', {
-                            setValueAs: (value) => value ? parseInt(value) : null,
+                            setValueAs: (value: string) => value ? parseInt(value) : null,
                         })}
                         id="voyage"
                         type="number"

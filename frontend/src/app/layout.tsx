@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import {Menubar} from "@/components/ui/menubar/Menubar";
-import React from "react";
+import React , {Suspense} from "react";
 import Header from "@/components/ui/header/Header";
 
 const geistSans = Geist({
@@ -35,7 +35,9 @@ export default function RootLayout({
             <div className="w-full flex-1 flex overflow-hidden">
                 <Menubar />
                 <main className="flex-1 overflow-y-auto">
-                    {children}
+                    <Suspense>
+                        {children}
+                    </Suspense>
                 </main>
             </div>
         </div>

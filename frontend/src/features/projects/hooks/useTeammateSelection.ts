@@ -1,9 +1,10 @@
 import {useState} from "react";
 import {User} from "@/types/user";
+import {ProjectSubmissionFormData} from "@/features/projects/schemas/project-submission-schema";
 
 interface UseTeammateSelectionProps {
     values: any
-    setFieldValue: (field: string, value: any) => void
+    setFieldValue: (field: keyof ProjectSubmissionFormData, value: any) => void
 }
 
 export const useTeammateSelection = ({ values, setFieldValue }: UseTeammateSelectionProps) => {
@@ -23,7 +24,7 @@ export const useTeammateSelection = ({ values, setFieldValue }: UseTeammateSelec
 
     const removeTeammate = (id: number) => {
         setFieldValue('teammates', selectedIds.filter((teamId: number) => teamId !== id))
-        setSelectedTeammates((prevState) => prevState.filter(teammate => teammate.userId != id))
+        setSelectedTeammates((prevState) => prevState.filter(teammate => Number(teammate.userId) != id))
     }
 
     const clearSearch = () => {
