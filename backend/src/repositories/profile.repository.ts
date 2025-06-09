@@ -1,6 +1,6 @@
-import {projectContributors , projects , projectTags , roles , tags , users} from '../db/schema';
+import {projectContributors , users} from '../db/schema';
 import {db} from '../db/db';
-import {and , eq , getTableColumns , sql} from 'drizzle-orm';
+import { eq , getTableColumns , sql} from 'drizzle-orm';
 import {UpdateUser} from '../db/schema/user';
 
 export const profileRepository = () => {

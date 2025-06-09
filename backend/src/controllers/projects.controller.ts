@@ -1,6 +1,6 @@
 import {NextFunction, Response, Request} from "express";
 import {projectsRepository, } from "../repositories/projects.repository";
-import {NewProjectInput} from "../types/projects/schemas/projects";
+import {NewProjectInput} from "../utils/types/projects/schemas/projects";
 
 const repo = projectsRepository();
 

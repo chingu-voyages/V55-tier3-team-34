@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {projects} from "../../../db/schema";
+import {projects} from "../../../../db/schema";
 
 
 export const createProjectSchema = z.object({

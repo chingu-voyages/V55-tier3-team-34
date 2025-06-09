@@ -1,7 +1,7 @@
 import {db} from "../db/db";
 import {tags} from "../db/schema";
 import {ilike} from "drizzle-orm";
-import {NewTag} from "../types/tag/schema/tags";
+import {NewTag} from "../utils/types/tag/schema/tags";
 
 
 export const tagRepository = () => {

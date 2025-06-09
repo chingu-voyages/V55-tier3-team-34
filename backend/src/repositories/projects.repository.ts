@@ -1,4 +1,4 @@
-import {NewProjectInput , ProjectInsertData , UpdateProjectInput} from "../types/projects/schemas/projects";
+import {NewProjectInput , ProjectInsertData , UpdateProjectInput} from "../utils/types/projects/schemas/projects";
 import {projectContributors , projects , projectTags , users} from "../db/schema";
 import {db} from "../db/db";
 import {eq , ilike , or , sql} from "drizzle-orm";
