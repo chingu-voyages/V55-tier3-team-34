@@ -1,4 +1,4 @@
-import {tags} from "../../../db/schema";
+import {tags} from "../../../../db/schema";
 import {z} from "zod";
 
 const createTagSchema = z.object({

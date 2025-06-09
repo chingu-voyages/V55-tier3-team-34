@@ -1,4 +1,4 @@
-import {NewProjectInput} from "../../types/projects/schemas/projects";
+import {NewProjectInput} from "../../utils/types/projects/schemas/projects";
 import {projectsRepository} from "../../repositories/projects.repository";
 
 export const projectsSeed = async () =>  {

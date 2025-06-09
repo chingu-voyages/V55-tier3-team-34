@@ -61,14 +61,9 @@ export const profileController = {
       if (!foundProfile) {
         res.status(404).json({ error: 'Profile not found' });
       } else {
-        const projects = foundProfile.userVoyages?.map((uv) => uv.voyage) || [];
-        const { userVoyages, ...profileData } = foundProfile;
   
         res.status(200).json({
-          data: {
-            ...profileData,
-            projects,
-          },
+          data: foundProfile
         });
       }
     } catch (e) {

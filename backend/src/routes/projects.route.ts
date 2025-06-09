@@ -4,7 +4,7 @@ import {ensureAuthenticated} from "../middleware/auth.middleware";
 
 import {validateData} from "../middleware/validation.middleware";
 import { updateProjectSchema} from "../db/schema/projects";
-import {createProjectSchema} from "../types/projects/schemas/projects";
+import {createProjectSchema} from "../utils/types/projects/schemas/projects";
 
 
 const projectRouter = Router();
