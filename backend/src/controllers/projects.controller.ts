@@ -58,6 +58,7 @@ export const projectController = {
       message: e instanceof Error ? e.message : "Failed to list projects",
     });
   }
+  
 },
   updateProject: async (req: Request, res: Response, next: NextFunction) => {
     const { projectId } = req.params;
