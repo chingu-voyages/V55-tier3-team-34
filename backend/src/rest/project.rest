@@ -16,3 +16,32 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/api/projects/search/teammates?search=@
 Content-Type: application/json
+
+###
+
+GET http://localhost:3000/api/projects?title=Smart
+
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/api/projects
+
+Content-Type: application/json
+
+###
+PUT http://localhost:3000/api/projects/20
+Content-Type: application/json
+Cookie: connect.sid=s%3AjstdBNXubn66GA042WVkkI4On4JgaA2i.NuvEsnkxDvEPQLRwawBNu4miT9l16HSrX8PmIlLUqZU
+
+{
+  "title": "Project Test",
+  "shortDescription": "description Test",
+  "longDescription": "Long description Test",
+  "voyage": 56, 
+  "tier": 2,
+  "mainImageUrl": "https://image.com",
+  "githubRepo": "https://github.com/example/awesome-project",
+  "teammates": [3,4,5],
+  "tags": [1]
+}
