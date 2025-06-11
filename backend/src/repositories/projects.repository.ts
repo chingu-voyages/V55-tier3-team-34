@@ -58,12 +58,10 @@ export const projectsRepository = ()  =>{
         });
     }
     const updateProject = async (projectId: number, data: UpdateProjectInput) => {
-        const [updated] = await db
-            .update(projects)
+        return db.update(projects)
             .set(data)
             .where(eq(projects.projectId, projectId))
             .returning();
-        return updated;
     };
 
   const listProjects = async (filters: { title?: string; description?: string; tier?: number | string } = {}) => {

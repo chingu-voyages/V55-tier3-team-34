@@ -15,7 +15,14 @@ projectRouter.get("/", projectController.listProjects);
 
 projectRouter
     .get("/:projectId", projectController.getProjectById)
-    .put("/:projectId",ensureAuthenticated, validateData(updateProjectSchema), projectController.updateProject);
+    .put(
+        "/:projectId",
+        ensureAuthenticated,
+        validateData(updateProjectSchema),
+        (req, res, next) => {
+            Promise.resolve(projectController.updateProject(req, res, next)).catch(next);
+        }
+    );
 projectRouter
     .get("/search/teammates", projectController.searchTeammates)
 
