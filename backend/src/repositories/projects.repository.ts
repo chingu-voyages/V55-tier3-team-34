@@ -1,7 +1,7 @@
 import {NewProjectInput , ProjectInsertData , UpdateProjectInput} from "../utils/types/projects/schemas/projects";
 import {projectContributors , projects , projectTags , users} from "../db/schema";
 import {db} from "../db/db";
-import {eq , ilike , or , sql} from "drizzle-orm";
+import {and, eq , ilike , or , sql} from "drizzle-orm";
 
 
 
@@ -65,31 +65,48 @@ export const projectsRepository = ()  =>{
             .returning();
         return updated;
     };
-    const listProjects = async () => {
-        return db.query.projects.findMany({
-            with: {
-                contributors: {
-                    columns: {},
-                    with: {
-                        contributor:{
-                            columns: {
-                                userId: true,
-                                displayName: true,
-                                firstname: true,
-                                lastname: true,
-                            }
-                        },
-                        role: true
-                    }
-                },
-                tags: {
-                    with: {
-                        tag: true
-                    }
-                }
-            }
-        });
-    };
+
+  const listProjects = async (filters: { title?: string; description?: string; tier?: number | string } = {}) => {
+    const { title, description, tier } = filters;
+    const whereClauses = [];
+
+    if (title) {
+      whereClauses.push(ilike(projects.title, `%${title}%`));
+    }
+    if (description) {
+      whereClauses.push(
+        ilike(projects.shortDescription, `%${description}%`)
+      );
+    }
+    if (tier) {
+      whereClauses.push(eq(projects.tier, Number(tier)));
+    }
+
+    return db.query.projects.findMany({
+      where: whereClauses.length ? and(...whereClauses) : undefined,
+      with: {
+        contributors: {
+          columns: {},
+          with: {
+            contributor: {
+              columns: {
+                userId: true,
+                displayName: true,
+                firstname: true,
+                lastname: true,
+              },
+            },
+            role: true,
+          },
+        },
+        tags: {
+          with: {
+            tag: true,
+          },
+        },
+      },
+    });
+  };
 
     return {
         getProjectById,
