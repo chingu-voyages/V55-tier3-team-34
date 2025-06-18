@@ -14,11 +14,12 @@ import useServerAction from "@/hooks/useServerAction";
 import {submitProjectAction} from "@/features/projects/api/submit-project";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
+import {useRouter} from "next/navigation";
 
 
 export default function ProjectSubmissionForm() {
     const { runAction, setIsLoading, isLoading } = useServerAction(submitProjectAction);
-
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -36,11 +37,13 @@ export default function ProjectSubmissionForm() {
     const values = watch();
 
     const onSubmit = async (data: ProjectSubmissionFormData) => {
-        console.log('received data', data)
         setIsLoading(true);
-        await runAction(data);
+        const [result, error ] = await runAction(data);
         setIsLoading(false);
-        reset();
+        if(result) {
+            router.back();
+            reset();
+        }
     };
 
     return (

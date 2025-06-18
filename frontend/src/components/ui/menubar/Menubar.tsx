@@ -9,6 +9,7 @@ import Link from "next/link";
 import {navigationPaths} from "@/config/navigation";
 import {Button} from "@/components/ui/button";
 import {PlusIcon} from "@radix-ui/react-icons";
+import {useAuthStore} from "@/store/authStore";
 
 
 export type MenubarType = {
@@ -20,6 +21,7 @@ export type MenubarType = {
 
 export function Menubar() {
     const currentPath = usePathname();
+    const isLoggedIn = useAuthStore(state => state.isLoggedIn)
     const [activeMenu, setActiveMenu] = useState<MenubarType['href']>(currentPath);
     const onMenuItemClick = (menuLabel: MenubarType['href']) => {
         setActiveMenu(menuLabel)
@@ -29,7 +31,7 @@ export function Menubar() {
             <ul className="h-full flex flex-col w-full  px-2">
                 <Link
                     className=" py-2 w-full group"
-                    href={navigationPaths.createProject()}>
+                    href={ isLoggedIn ? navigationPaths.createProject() : navigationPaths.githubLogin() }>
                     <Button
                         variant="default"
                         className="mb-12 w-full flex justify-center items-center bg-gradient-to-r from-primary to-tertiary hover:from-primary/90 hover:to-tertiary/90 text-primary-foreground font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out border-0 relative overflow-hidden group-hover:animate-pulse"

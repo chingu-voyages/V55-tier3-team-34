@@ -15,9 +15,13 @@ export interface Project {
             userId: number
             displayName: string | null
             firstname: string | null
-            lastname: string | null
+            lastname: string | null,
+            avatarUrl: string | null
         }
-        role: string | null
+        role: {
+            roleId: string | null,
+            name: string
+        }
     }>
     tags: Array<{
         projectId: number

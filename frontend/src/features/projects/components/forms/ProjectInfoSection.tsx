@@ -101,9 +101,12 @@ export const ProjectInfoSection: React.FC<ProjectInfoSectionProps> = ({
                         {...register('mainImageUrl')}
                         id="mainImageUrl"
                         type="url"
-                        placeholder="https://example.com/image.jpg"
+                        placeholder="https://raw.githubusercontent.com/user/repo/main/image.jpg"
                         className={errors.mainImageUrl ? 'border-red-500' : ''}
                     />
+                    <p className="text-xs text-gray-500 mt-1">
+                        Accepted formats: JPG, PNG, GIF, WebP, SVG from *.githubusercontent.com
+                    </p>
                     {errors.mainImageUrl && (
                         <p className="text-red-500 text-xs mt-1">{errors.mainImageUrl.message}</p>
                     )}

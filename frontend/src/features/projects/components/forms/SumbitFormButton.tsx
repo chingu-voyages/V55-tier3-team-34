@@ -9,7 +9,7 @@ interface FormActionsProps {
 export const FormActions: React.FC<FormActionsProps> = ({ isSubmitting }) => {
     return (
         <div className="flex justify-end space-x-4">
-            <Button type="button" variant="outline">
+            <Button type='button' variant={"outline"}>
                 cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>

@@ -36,8 +36,12 @@ export const projectController = {
     },
 
     listProjects: async (req: Request, res: Response, next: NextFunction) => {
+        const { search, tier } = req.query;
         try {
-            const projects = await repo.listProjects();
+            const projects = await repo.listProjects({
+                description: typeof search === 'string' ? search : undefined,
+                tier: typeof tier === 'string' ? tier : undefined,
+            });
             res.status(200).json({ data: projects });
         } catch (e) {
             console.error(e);
