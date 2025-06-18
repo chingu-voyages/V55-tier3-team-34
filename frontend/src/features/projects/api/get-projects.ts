@@ -5,6 +5,6 @@ import {ProjectSearchOptions} from "@/features/projects/components/showcase/Proj
 
 
 export const getProjects = ( searchOption: ProjectSearchOptions): Promise<AsyncFnResponse<GetProjectsResponse>> => {
-    return handleAsync(() => api.get('/projects', { params: {search: searchOption.search, tier: searchOption.tier}}))
+    return handleAsync(() => api.get('/projects', { params: {search: searchOption.search, tier: searchOption.tier == "0" ? undefined: searchOption.tier}}))
 }
 

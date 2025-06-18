@@ -13,12 +13,19 @@ export const projectSubmissionSchema = Yup.object({
     voyage: Yup.number().nullable().required(),
     mainImageUrl: Yup.string()
         .url('Must be a valid URL')
-        .nullable()
-        .required(),
+        .required('Main image URL is required')
+        .matches(
+            /^https:\/\/.*\.githubusercontent\.com\/.*\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i,
+            'Image must be hosted on GitHub (*.githubusercontent.com) with supported format (jpg, jpeg, png, gif, webp, svg)'
+        ),
     githubRepo: Yup.string()
-        .max(100, 'GitHub repo must be 100 characters or less')
-        .nullable()
-        .required(),
+        .url('Must be a valid URL')
+        .required('GitHub repository URL is required')
+        .matches(
+            /^https:\/\/github\.com\/[\w\-\.]+\/[\w\-\.]+\/?$/,
+            'Must be a valid GitHub repository URL (https://github.com/username/repository)'
+        )
+        .max(100, 'GitHub repo URL must be 100 characters or less'),
     teammates: Yup.array()
         .of(Yup.number().positive())
         .required('Teammates array is required'),

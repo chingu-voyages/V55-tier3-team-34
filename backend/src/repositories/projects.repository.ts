@@ -1,7 +1,7 @@
 import {NewProjectInput , ProjectInsertData , UpdateProjectInput} from "../utils/types/projects/schemas/projects";
 import {projectContributors , projects , projectTags , users} from "../db/schema";
 import {db} from "../db/db";
-import {eq , ilike , or , sql} from "drizzle-orm";
+import {and , eq , ilike , or , sql} from "drizzle-orm";
 
 
 
@@ -51,10 +51,28 @@ export const projectsRepository = ()  =>{
      const getProjectById = async (id: number) =>  {
          return await db.query.projects.findFirst({
             where: eq(projects.projectId , id) ,
-            with: {
-                tags: true,
-                contributors: true
-            }
+             with: {
+                 contributors: {
+                     columns: {},
+                     with: {
+                         contributor:{
+                             columns: {
+                                 userId: true,
+                                 displayName: true,
+                                 firstname: true,
+                                 lastname: true,
+                                 avatarUrl: true
+                             }
+                         },
+                         role: true
+                     }
+                 },
+                 tags: {
+                     with: {
+                         tag: true
+                     }
+                 }
+             }
         });
     }
     const updateProject = async (projectId: number, data: UpdateProjectInput) => {
@@ -65,8 +83,22 @@ export const projectsRepository = ()  =>{
             .returning();
         return updated;
     };
-    const listProjects = async () => {
+    const listProjects = async (filters: { search?: string; tier?: number | string } = {}) => {
+        const { search, tier } = filters;
+        const whereClauses = [];
+
+        if (search) {
+            whereClauses.push(ilike(projects.title, `%${search}%`));
+            whereClauses.push(
+                ilike(projects.shortDescription, `%${search}%`)
+            );
+        }
+        if (tier) {
+            whereClauses.push(eq(projects.tier, Number(tier)));
+        }
+
         return db.query.projects.findMany({
+            where: whereClauses.length ? or(...whereClauses) : undefined,
             with: {
                 contributors: {
                     columns: {},
@@ -77,6 +109,7 @@ export const projectsRepository = ()  =>{
                                 displayName: true,
                                 firstname: true,
                                 lastname: true,
+                                avatarUrl: true
                             }
                         },
                         role: true
